@@ -11,16 +11,6 @@ const Button = ({ name, onClick }) => (
     <button onClick={onClick}>{name}</button>
 )
 
-// const Counter = (props) => (
-//     <div>
-//         <p>{props.name} {props.count}</p>
-//     </div>
-// )
-
-// const Statistic = ({ text, value }) => (
-//     <p>{text} {value}</p>
-// )
-
 const Statistics = ({ good, neutral, bad }) => {
     if (good === 0 && neutral === 0 && bad === 0) {
         return (
@@ -57,12 +47,6 @@ const Statistics = ({ good, neutral, bad }) => {
                         <td>{good / (good + neutral + bad)}</td>
                     </tr>
                 </table>
-                {/* <Statistic text="good" value={good}></Statistic>
-                <Statistic text="neutral" value={neutral}></Statistic>
-                <Statistic text="bad" value={bad}></Statistic>
-                <Statistic text="all" value={good + neutral + bad}></Statistic>
-                <Statistic text="average" value={(good + bad * -1) / (good + neutral + bad)}></Statistic>
-                <Statistic text="positive" value={good / (good + neutral + bad)}></Statistic> */}
             </div>
         )
     }
@@ -92,9 +76,6 @@ const App = () => {
             <Button name='good' onClick={handleGoodButton}></Button>
             <Button name='neutral' onClick={handleNeutralButton}></Button>
             <Button name='bad' onClick={handleBadButton}></Button>
-            {/* <button onClick={handleGoodButton}>good</button>
-            <button onClick={handleNeutralButton}>neutral</button>
-            <button onClick={handleBadButton}>bad</button> */}
             <Title title='statistics'></Title>
             <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
         </div>
