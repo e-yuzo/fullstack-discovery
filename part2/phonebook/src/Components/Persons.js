@@ -2,7 +2,15 @@ import React from 'react'
 
 const Person = ( {person} ) => {
     return (
-        <li>{person.name} {person.number}</li>
+        <div>
+            <li>{person.name} {person.number} <Button key={person.id} remove={removePerson}> </Button></li> 
+        </div>
+    )
+}
+
+const Button = ( {remove} ) => {
+    return (
+        <button onClick={remove}>delete</button>
     )
 }
 

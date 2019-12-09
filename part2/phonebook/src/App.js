@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Persons from './Components/Persons'
 import PersonForm from './Components/PersonForm'
 import Filter from './Components/Filter'
-import axios from 'axios'
+import phoneService from './services/phonebook'
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -11,10 +11,13 @@ const App = () => {
     const [newFilter, setNewFilter] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:3001/persons')
-             .then(response => {
-                 setPersons(response.data)
-             })
+        phoneService.getAll().then(initialPersons => {
+            setPersons(initialPersons)
+        })
+        // axios.get('http://localhost:3001/persons')
+        //     .then(response => {
+        //         setPersons(response.data)
+        //     })
     }, [])
 
     const personsToShow = (newFilter === '')
@@ -37,6 +40,12 @@ const App = () => {
         setNewNumber(event.target.value)
     }
 
+    const deletePerson = (id) => {
+        phoneService.remove(id).then(status => {
+            console.log(status)
+        })
+    }
+
     const addName = (event) => {
         event.preventDefault()
         const personObject = {
@@ -47,9 +56,12 @@ const App = () => {
         if (array.indexOf(personObject.name) !== -1) {
             window.alert(`${newName} is already added to phonebook`)
         } else {
-            setPersons(persons.concat(personObject))
-            setNewName('')
-            setNewNumber('')
+            // setPersons(persons.concat(personObject))
+            phoneService.create(personObject).then(returnedPerson => {
+                setPersons(persons.concat(returnedPerson))
+                setNewName('')
+                setNewNumber('')
+            })
         }
     }
 
