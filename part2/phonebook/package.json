@@ -36,5 +36,6 @@
     "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.16.0",
     "json-server": "^0.15.1"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
